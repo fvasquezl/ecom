@@ -13,7 +13,7 @@ class UpdateProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,6 @@ class UpdateProductRequest extends FormRequest
         return [
             'name'=> 'required|string|max:255',
             'code'=>'required|string|max:20',
-            'image'=>'required|file',
             'role'=>'in:admin,client',
             'description'=>'required',
             'price'=>'required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/',

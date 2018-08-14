@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,24 +44,8 @@ class ProductController extends Controller
     {
        $product =Auth::user()->products()->create($request->all());
 
-        return redirect()->route('admin.products.edit',$product->id);
+        return redirect()->route('admin.products.edit',$product);
     }
-//    public function store(StoreProductRequest $request)
-//    {
-//        $product =Auth::user()->products()->create($request->all());
-//
-//        if($request->hasFile('image'))
-//        {
-//            $image = $request->file('image');
-//            $fileName = $image->getClientOriginalName();
-//          //  $fileExtension = $image->getClientOriginalExtension();
-//            $image->move('product-images',$fileName);
-//            $product->image = 'product-images/'.$fileName;
-//        }
-//        $product->save();
-//
-//        return redirect()->route('admin.product.show',$product);
-//    }
 
     /**
      * Display the specified resource.
@@ -87,13 +72,14 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param UpdateProductRequest $request
+     * @param  \App\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        return redirect(route('admin.products.index'));
     }
 
     /**

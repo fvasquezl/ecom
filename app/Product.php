@@ -10,12 +10,12 @@ class Product extends Model
 {
    protected $fillable=['name','code','description','price'];
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+//    public function getRouteKeyName()
+//    {
+//        return 'slug';
+//    }
 
-    public function setTitleAttribute($name)
+    public function setNameAttribute($name)
     {
         $this->attributes['name'] = $name;
         $this->attributes['slug'] = Str::slug($name);

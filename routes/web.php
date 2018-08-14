@@ -21,11 +21,12 @@ Route::get('product/{id}', function (){
 
 Route::group(['prefix'=> 'admin','middleware' =>['role:admin']], function(){
 
-    Route::get('products/create','Admin\ProductController@create')->name('admin.products.create');
     Route::get('products','Admin\ProductController@index')->name('admin.products.index');
-    Route::get('product/{id}-{slug}','Admin\ProductController@show')->name('admin.product.show');
+    Route::get('products/create','Admin\ProductController@create')->name('admin.products.create');
     Route::post('products/store','Admin\ProductController@store')->name('admin.products.store');
-    Route::get('products/{id}/edit','Admin\ProductController@edit')->name('admin.products.edit');
+    Route::get('product/{id}-{slug}','Admin\ProductController@show')->name('admin.product.show');
+    Route::get('products/{product}/edit','Admin\ProductController@edit')->name('admin.products.edit');
+    Route::put('products/update/{product}','Admin\ProductController@update')->name('admin.products.update');
 
 });
 
